@@ -27,8 +27,10 @@ The procedure is explained on the [installation guide](https://www.mongodb.com/d
 We create and populante the bookAPI database used on the project by doing `mongosh bookAPI booksJson.js`. To check it, we can enter `mongosh` and execute in the terminal
 
 ```bash
-show dbs;
+show dbs
 use bookAPI
 ```
 
 After that, we have switched to the bookAPI, we can see the collections using `show collections` and display the contents of it using `db.books.find()`
+
+Important entries to understand the commands used are the [Databases and Collections](https://www.mongodb.com/docs/manual/core/databases-and-collections/#databases-and-collections), [listCollections](https://www.mongodb.com/docs/manual/reference/command/listCollections/) and [Collection Methods](https://www.mongodb.com/docs/manual/reference/method/js-collection/) pages from MongoDB docs.
