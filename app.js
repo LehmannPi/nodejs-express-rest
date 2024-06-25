@@ -20,6 +20,15 @@ bookRouter.route('/books').get(async (req, res) => {
   }
 });
 
+bookRouter.route('/books/:bookId').get(async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.bookId);
+    res.status(200).json(book);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 app.use('/api', bookRouter);
 
 app.get('/', (req, res) => {
