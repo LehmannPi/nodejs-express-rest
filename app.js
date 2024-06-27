@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require(`mongoose`);
+const bodyParser = require('body-parser');
 
 const app = express();
 const bookRouter = express.Router();
@@ -7,18 +8,29 @@ const db = mongoose.connect('mongodb://localhost/bookAPI');
 const port = process.env.PORT || 3000;
 const Book = require('./models/bookModel');
 
-bookRouter.route('/books').get(async (req, res) => {
-  try {
-    const query = {};
-    if (req.query.genre) {
-      query.genre = req.query.genre;
+// "kind of sets the whole thing up so that it'll pull JSON out of the POST body and give it to us in that req.body"
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+bookRouter
+  .route('/books')
+  .post((req, res) => {
+    const book = new Book(req.body);
+    console.log(book);
+    res.json(book);
+  })
+  .get(async (req, res) => {
+    try {
+      const query = {};
+      if (req.query.genre) {
+        query.genre = req.query.genre;
+      }
+      const books = await Book.find(query);
+      res.status(200).json(books);
+    } catch (err) {
+      res.status(500).json(err);
     }
-    const books = await Book.find(query);
-    res.status(200).json(books);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+  });
 
 bookRouter.route('/books/:bookId').get(async (req, res) => {
   try {
