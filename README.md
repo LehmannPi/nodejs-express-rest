@@ -3,10 +3,22 @@
 The goals for the project are
 
 - Get Data
+
+  - Creating a [Model](#on-mongoose-)
   - Implement HTTP GET
-  - Get a list of items or just one
-  - Wire up to MongoDB
-  - Search for items
+  - Wire up to [MongoDB](#on-mongodb-)
+  - List and search for items
+
+- Post Data
+
+  - POST with Body Parser
+  - Testing with Postman
+  - Saving data
+
+- Updating Data
+  - Implementing PUT
+  - Middleware
+  - Implementing PATCH
 
 ## Stack ⚙️
 
@@ -17,6 +29,7 @@ The goals for the project are
 
 - Nodemon
 - Eslint
+- Postman
 
 ## On MongoDB 🍃
 
@@ -34,3 +47,11 @@ use bookAPI
 After that, we have switched to the bookAPI, we can see the collections using `show collections` and display the contents of it using `db.books.find()`
 
 Important entries to understand the commands used are the [Databases and Collections](https://www.mongodb.com/docs/manual/core/databases-and-collections/#databases-and-collections), [listCollections](https://www.mongodb.com/docs/manual/reference/command/listCollections/) and [Collection Methods](https://www.mongodb.com/docs/manual/reference/method/js-collection/) pages from MongoDB docs.
+
+## On Mongoose 🦦
+
+According to a [MongoDB developer article](https://www.mongodb.com/developer/languages/javascript/mongoose-versus-nodejs-driver/) "Mongoose is a Node. js-based Object Data Modeling (ODM) library for MongoDB. It is akin to an Object Relational Mapper (ORM) such as SQLAlchemy for traditional SQL databases". So it is necessary to have [MongoDB](http://www.mongodb.org/downloads) and [Node.js](http://nodejs.org/) installed.
+
+It was used to created the Book [model](<https://mongoosejs.com/docs/api/model.html#Model()>) through the [Schema](https://mongoosejs.com/docs/guide.html) defining the shape of the documents within the MongoDB collection.
+
+An important page to understand the methods used throught the project as well as other data query possibilities is the [Model](https://mongoosejs.com/docs/api/model.html) page, with methods like create, find, findById, save, delete methods and many more.
