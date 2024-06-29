@@ -23,14 +23,33 @@ function routes(Book) {
       }
     });
 
-  bookRouter.route('/books/:bookId').get(async (req, res) => {
-    try {
-      const book = await Book.findById(req.params.bookId);
-      res.status(200).json(book);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+  bookRouter
+    .route('/books/:bookId')
+    .get(async (req, res) => {
+      try {
+        const book = await Book.findById(req.params.bookId);
+        res.status(200).json(book);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    })
+    .put(async (req, res) => {
+      try {
+        const query = {};
+        if (req.query.genre) {
+          query.genre = req.query.genre;
+        }
+        let book = await Book.findById(req.params.bookId);
+        book.title = req.body.title;
+        book.author = req.body.author;
+        book.genre = req.body.genre;
+        book.read = req.body.read;
+        book.save();
+        res.status(200).json(book);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    });
 
   return bookRouter;
 }
